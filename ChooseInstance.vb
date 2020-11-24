@@ -7,6 +7,16 @@ Public Class ChooseInstanceForm
     Public InstanceName As String
 
     Private Sub InitialForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim AllOpenForms As FormCollection = Application.OpenForms
+
+        For Each FormName As Form In AllOpenForms
+            If FormName.Name = "ErrorLogViewerForm" Then
+                FormName.Close()
+                Exit For
+            End If
+        Next
+
         Dim sqlRegistryKey As RegistryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, Microsoft.Win32.RegistryView.Registry64).OpenSubKey("SOFTWARE\\Microsoft\\Microsoft SQL Server\\Instance Names\\SQL")
 
         For Each subkey In sqlRegistryKey.GetValueNames()

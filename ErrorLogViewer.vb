@@ -6,14 +6,6 @@ Public Class ErrorLogViewerForm
 
     Private Function GetErrorLogData(ErrorLogPath As String)
         Dim TempPath = Path.GetTempPath() + "ERRORLOG"
-        'Dim SQLServerKey = "SOFTWARE\\Microsoft\\Microsoft SQL Server\\Instance Names\\SQL\\"
-        'Dim SQLRegistryKey As RegistryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, Microsoft.Win32.RegistryView.Registry64).OpenSubKey(SQLServerKey)
-
-        'Dim FullInstanceName = SQLRegistryKey.GetValue(ChooseInstanceForm.InstanceName)
-        'Dim RegistrySubKey = "SOFTWARE\\Microsoft\\Microsoft SQL Server\\" + FullInstanceName + "\\MSSQLServer\\Parameters\\"
-        'Dim ErrorLogPathRegistryKey As RegistryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, Microsoft.Win32.RegistryView.Registry64).OpenSubKey(RegistrySubKey)
-        'Dim CurrentErrorLogPath = ErrorLogPathRegistryKey.GetValue("SQLArg1").ToString.Substring(2)
-
         Dim PowerShellRunspace As Runspace = RunspaceFactory.CreateRunspace()
         PowerShellRunspace.Open()
         Dim PowerShellCommand As Pipeline = PowerShellRunspace.CreatePipeline()
@@ -26,10 +18,13 @@ Public Class ErrorLogViewerForm
         For i As Integer = 5 To ErrorLogLines.Count - 2
             Dim data As String() = ErrorLogLines(i).Split(CType(" ", Char()), StringSplitOptions.RemoveEmptyEntries)
             Dim errorMessage = ErrorLogLines(i).Substring(ErrorLogLines(i).IndexOf("    "))
+            Dim DateTimeLog As DateTime
+            If DateTime.TryParse(data(0).Trim + " " + data(1).Trim, DateTimeLog) = False Then
+                DateTimeLog = DateTime.Now()
+            End If
 
             ErrorLogList.Add(New ErrorLogClass() With {
-            .CLogDate = data(0).Trim,
-            .CLogTime = data(1).Trim,
+            .CLogDate = DateTimeLog,
             .CId = data(2).Trim,
             .CMessage = errorMessage.Trim
             })
@@ -58,11 +53,28 @@ Public Class ErrorLogViewerForm
             If FileDialogObject.ShowDialog() = DialogResult.OK Then
                 Dim ErrorLogList = GetErrorLogData(FileDialogObject.FileName)
                 ErrorLogClassBindingSource.DataSource = ErrorLogList
+                ErrorLogPathLabel.Text = FileDialogObject.FileName
             End If
         End Using
     End Sub
 
     Private Sub AboutMenuSubItem_Click(sender As Object, e As EventArgs) Handles AboutMenuSubItem.Click
         About.Show()
+    End Sub
+
+    Private Sub ReverseOrderButton_Click(sender As Object, e As EventArgs) Handles ReverseOrderButton.Click
+
+
+
+
+
+        ErrorLogClassBindingSource.DataSource.Reverse()
+        ErrorLogClassBindingSource.ResetBindings(True)
+
+
+    End Sub
+
+    Private Sub SelectInstanceButton_Click(sender As Object, e As EventArgs) Handles ChangeInstanceButton.Click
+        ChooseInstanceForm.Show()
     End Sub
 End Class

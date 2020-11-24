@@ -23,8 +23,9 @@ Partial Class ErrorLogViewerForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.ErrorLogDataGridView = New System.Windows.Forms.DataGridView()
-        Me.OpenFileButton = New System.Windows.Forms.Button()
+        Me.ReverseOrderButton = New System.Windows.Forms.Button()
         Me.ErrorLogViewerMenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenMenuSubItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -35,8 +36,8 @@ Partial Class ErrorLogViewerForm
         Me.InstanceInformationLabel = New System.Windows.Forms.Label()
         Me.InformationPanel = New System.Windows.Forms.Panel()
         Me.ErrorLogPathLabel = New System.Windows.Forms.Label()
+        Me.ChangeInstanceButton = New System.Windows.Forms.Button()
         Me.CLogDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CLogTimeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CMessageDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ErrorLogClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -48,28 +49,31 @@ Partial Class ErrorLogViewerForm
         '
         'ErrorLogDataGridView
         '
+        Me.ErrorLogDataGridView.AllowUserToAddRows = False
+        Me.ErrorLogDataGridView.AllowUserToDeleteRows = False
         Me.ErrorLogDataGridView.AllowUserToOrderColumns = True
         Me.ErrorLogDataGridView.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ErrorLogDataGridView.AutoGenerateColumns = False
         Me.ErrorLogDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ErrorLogDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CLogDateDataGridViewTextBoxColumn, Me.CLogTimeDataGridViewTextBoxColumn, Me.CIdDataGridViewTextBoxColumn, Me.CMessageDataGridViewTextBoxColumn})
+        Me.ErrorLogDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CLogDateDataGridViewTextBoxColumn, Me.CIdDataGridViewTextBoxColumn, Me.CMessageDataGridViewTextBoxColumn})
         Me.ErrorLogDataGridView.DataSource = Me.ErrorLogClassBindingSource
         Me.ErrorLogDataGridView.Location = New System.Drawing.Point(13, 27)
         Me.ErrorLogDataGridView.Name = "ErrorLogDataGridView"
+        Me.ErrorLogDataGridView.ReadOnly = True
         Me.ErrorLogDataGridView.Size = New System.Drawing.Size(775, 350)
         Me.ErrorLogDataGridView.TabIndex = 0
         '
-        'OpenFileButton
+        'ReverseOrderButton
         '
-        Me.OpenFileButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.OpenFileButton.Location = New System.Drawing.Point(713, 415)
-        Me.OpenFileButton.Name = "OpenFileButton"
-        Me.OpenFileButton.Size = New System.Drawing.Size(75, 23)
-        Me.OpenFileButton.TabIndex = 1
-        Me.OpenFileButton.Text = "Abrir Log"
-        Me.OpenFileButton.UseVisualStyleBackColor = True
+        Me.ReverseOrderButton.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ReverseOrderButton.Location = New System.Drawing.Point(605, 415)
+        Me.ReverseOrderButton.Name = "ReverseOrderButton"
+        Me.ReverseOrderButton.Size = New System.Drawing.Size(183, 23)
+        Me.ReverseOrderButton.TabIndex = 1
+        Me.ReverseOrderButton.Text = "Orden Inverso"
+        Me.ReverseOrderButton.UseVisualStyleBackColor = True
         '
         'ErrorLogViewerMenuStrip
         '
@@ -102,6 +106,7 @@ Partial Class ErrorLogViewerForm
         '
         'OptionsMenuSubItem
         '
+        Me.OptionsMenuSubItem.Enabled = False
         Me.OptionsMenuSubItem.Name = "OptionsMenuSubItem"
         Me.OptionsMenuSubItem.Size = New System.Drawing.Size(133, 22)
         Me.OptionsMenuSubItem.Text = "Opciones..."
@@ -135,7 +140,7 @@ Partial Class ErrorLogViewerForm
         Me.InformationPanel.Controls.Add(Me.InstanceInformationLabel)
         Me.InformationPanel.Location = New System.Drawing.Point(13, 384)
         Me.InformationPanel.Name = "InformationPanel"
-        Me.InformationPanel.Size = New System.Drawing.Size(694, 54)
+        Me.InformationPanel.Size = New System.Drawing.Size(586, 54)
         Me.InformationPanel.TabIndex = 5
         '
         'ErrorLogPathLabel
@@ -147,29 +152,41 @@ Partial Class ErrorLogViewerForm
         Me.ErrorLogPathLabel.TabIndex = 5
         Me.ErrorLogPathLabel.Text = "ErrorLogPathLabel"
         '
+        'ChangeInstanceButton
+        '
+        Me.ChangeInstanceButton.Location = New System.Drawing.Point(605, 384)
+        Me.ChangeInstanceButton.Name = "ChangeInstanceButton"
+        Me.ChangeInstanceButton.Size = New System.Drawing.Size(183, 23)
+        Me.ChangeInstanceButton.TabIndex = 6
+        Me.ChangeInstanceButton.Text = "Cambiar Instancia"
+        Me.ChangeInstanceButton.UseVisualStyleBackColor = True
+        '
         'CLogDateDataGridViewTextBoxColumn
         '
+        Me.CLogDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.CLogDateDataGridViewTextBoxColumn.DataPropertyName = "CLogDate"
-        Me.CLogDateDataGridViewTextBoxColumn.HeaderText = "CLogDate"
+        DataGridViewCellStyle1.Format = "F"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.CLogDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle1
+        Me.CLogDateDataGridViewTextBoxColumn.HeaderText = "Fecha"
         Me.CLogDateDataGridViewTextBoxColumn.Name = "CLogDateDataGridViewTextBoxColumn"
-        '
-        'CLogTimeDataGridViewTextBoxColumn
-        '
-        Me.CLogTimeDataGridViewTextBoxColumn.DataPropertyName = "CLogTime"
-        Me.CLogTimeDataGridViewTextBoxColumn.HeaderText = "CLogTime"
-        Me.CLogTimeDataGridViewTextBoxColumn.Name = "CLogTimeDataGridViewTextBoxColumn"
+        Me.CLogDateDataGridViewTextBoxColumn.ReadOnly = True
+        Me.CLogDateDataGridViewTextBoxColumn.Width = 62
         '
         'CIdDataGridViewTextBoxColumn
         '
         Me.CIdDataGridViewTextBoxColumn.DataPropertyName = "CId"
-        Me.CIdDataGridViewTextBoxColumn.HeaderText = "CId"
+        Me.CIdDataGridViewTextBoxColumn.HeaderText = "Id"
         Me.CIdDataGridViewTextBoxColumn.Name = "CIdDataGridViewTextBoxColumn"
+        Me.CIdDataGridViewTextBoxColumn.ReadOnly = True
         '
         'CMessageDataGridViewTextBoxColumn
         '
+        Me.CMessageDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.CMessageDataGridViewTextBoxColumn.DataPropertyName = "CMessage"
-        Me.CMessageDataGridViewTextBoxColumn.HeaderText = "CMessage"
+        Me.CMessageDataGridViewTextBoxColumn.HeaderText = "Mensaje"
         Me.CMessageDataGridViewTextBoxColumn.Name = "CMessageDataGridViewTextBoxColumn"
+        Me.CMessageDataGridViewTextBoxColumn.ReadOnly = True
         '
         'ErrorLogClassBindingSource
         '
@@ -180,8 +197,9 @@ Partial Class ErrorLogViewerForm
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.ChangeInstanceButton)
         Me.Controls.Add(Me.InformationPanel)
-        Me.Controls.Add(Me.OpenFileButton)
+        Me.Controls.Add(Me.ReverseOrderButton)
         Me.Controls.Add(Me.ErrorLogDataGridView)
         Me.Controls.Add(Me.ErrorLogViewerMenuStrip)
         Me.Name = "ErrorLogViewerForm"
@@ -199,7 +217,7 @@ Partial Class ErrorLogViewerForm
     End Sub
 
     Friend WithEvents ErrorLogDataGridView As DataGridView
-    Friend WithEvents OpenFileButton As Button
+    Friend WithEvents ReverseOrderButton As Button
     Friend WithEvents ErrorLogClassBindingSource As BindingSource
     Friend WithEvents ErrorLogViewerMenuStrip As MenuStrip
     Friend WithEvents FileMenuItem As ToolStripMenuItem
@@ -211,8 +229,9 @@ Partial Class ErrorLogViewerForm
     Friend WithEvents InstanceInformationLabel As Label
     Friend WithEvents InformationPanel As Panel
     Friend WithEvents ErrorLogPathLabel As Label
-    Friend WithEvents CLogDateDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents CLogTimeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents ChangeInstanceButton As Button
+    Friend WithEvents CLogDateDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents CIdDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents CMessageDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 End Class
