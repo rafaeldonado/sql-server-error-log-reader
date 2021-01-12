@@ -77,4 +77,8 @@ Public Class ErrorLogViewerForm
     Private Sub SelectInstanceButton_Click(sender As Object, e As EventArgs) Handles ChangeInstanceButton.Click
         ChooseInstanceForm.Show()
     End Sub
+
+    Private Sub SalirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalirToolStripMenuItem.Click
+        Me.Close()
+    End Sub
 End Class

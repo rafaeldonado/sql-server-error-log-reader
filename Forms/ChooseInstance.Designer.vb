@@ -22,6 +22,7 @@ Partial Class ChooseInstanceForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ChooseInstanceForm))
         Me.InstancesListView = New System.Windows.Forms.ListView()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ChooseInstanceLabel = New System.Windows.Forms.Label()
@@ -31,49 +32,33 @@ Partial Class ChooseInstanceForm
         'InstancesListView
         '
         Me.InstancesListView.Activation = System.Windows.Forms.ItemActivation.OneClick
-        Me.InstancesListView.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.InstancesListView.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        resources.ApplyResources(Me.InstancesListView, "InstancesListView")
         Me.InstancesListView.FullRowSelect = True
         Me.InstancesListView.GridLines = True
         Me.InstancesListView.HideSelection = False
-        Me.InstancesListView.Location = New System.Drawing.Point(10, 48)
         Me.InstancesListView.Name = "InstancesListView"
-        Me.InstancesListView.Size = New System.Drawing.Size(300, 120)
-        Me.InstancesListView.TabIndex = 0
         Me.InstancesListView.UseCompatibleStateImageBehavior = False
         Me.InstancesListView.View = System.Windows.Forms.View.List
         '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.ChooseInstanceLabel)
-        Me.Panel1.Location = New System.Drawing.Point(12, 12)
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(300, 30)
-        Me.Panel1.TabIndex = 1
         '
         'ChooseInstanceLabel
         '
-        Me.ChooseInstanceLabel.AutoSize = True
-        Me.ChooseInstanceLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ChooseInstanceLabel.Location = New System.Drawing.Point(4, 4)
+        resources.ApplyResources(Me.ChooseInstanceLabel, "ChooseInstanceLabel")
         Me.ChooseInstanceLabel.Name = "ChooseInstanceLabel"
-        Me.ChooseInstanceLabel.Size = New System.Drawing.Size(216, 17)
-        Me.ChooseInstanceLabel.TabIndex = 0
-        Me.ChooseInstanceLabel.Text = "Por favor seleccione la instancia:"
         '
         'ChooseInstanceForm
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(320, 176)
         Me.ControlBox = False
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.InstancesListView)
         Me.Name = "ChooseInstanceForm"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Instancia"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)

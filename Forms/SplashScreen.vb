@@ -33,15 +33,13 @@ Public NotInheritable Class SplashScreen
         ''Copyright info
         'Copyright.Text = My.Application.Info.Copyright
 
-        Dim SplashTextStringReader As StringReader = New StringReader(My.Resources.splash)
+        'Dim SplashTextStringReader As StringReader = New StringReader(My.Resources.splash)
 
-
-
-        Dim SplashLine As String
-        For Each SplashLine In SplashTextStringReader.ReadLine()
-            Label1.Text = SplashLine
-            'System.Threading.Thread.Sleep(500)
-        Next
+        'Dim SplashLine As String
+        'For Each SplashLine In SplashTextStringReader.ReadLine()
+        '    'Label1.Text = SplashLine 
+        '    'System.Threading.Thread.Sleep(500)
+        'Next
 
     End Sub
 

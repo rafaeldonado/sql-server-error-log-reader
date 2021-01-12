@@ -24,6 +24,7 @@ Partial Class SplashScreen
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SplashScreen))
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -37,6 +38,17 @@ Partial Class SplashScreen
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Starting ..."
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(15, 273)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(235, 13)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "© 2020 SQL Dr. SAS All rights reserved"
+        '
         'SplashScreen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -45,6 +57,7 @@ Partial Class SplashScreen
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(638, 298)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -58,4 +71,5 @@ Partial Class SplashScreen
     End Sub
 
     Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
 End Class
